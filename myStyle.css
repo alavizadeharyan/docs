@@ -1,0 +1,215 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+}
+
+:root{
+  --page-width: 1920px;
+  --toc-width-ratio: 0.2;
+  --content-font-size: 18px;
+  --content-horizontal-padding: 50px;
+  --toc-font-size: 16px;
+  --toolbar-height: 55px;
+  --dark-mode-bg-color: 45, 45, 42;
+  --dark-mode-color: 255, 255, 255;
+  --dark-mode-toc-bg-color: 42, 42, 39;
+  --dark-mode-toc-color: 0, 153, 255;
+  --light-mode-bg-color: 255, 255, 255;
+  --light-mode-color: 0, 0, 0;
+  --light-mode-toc-bg-color: 249, 249, 249;
+  --light-mode-toc-color: 51, 102, 204
+}
+
+::placeholder {
+  color: inherit;
+  opacity: 0.6;
+}
+
+/* Adjust the value to match the height of the sticky bar */
+h1, h2, h3, h4, h5, h6 {
+  scroll-margin-top: var(--toolbar-height);
+}
+
+.content{
+  font-size: var(--content-font-size);
+  width: calc((var(--page-width) * (1 - var(--toc-width-ratio))) - 2 * var(--content-horizontal-padding));
+  max-width: calc((100% * (1 - var(--toc-width-ratio))) - 2 * var(--content-horizontal-padding));
+  padding: 0 var(--content-horizontal-padding);
+  text-align: justify;
+  margin: 0 auto;
+  left: clamp(0px, calc((var(--page-width) * var(--toc-width-ratio)) / 2), calc((100% * var(--toc-width-ratio)) / 2));
+  position: relative;
+  z-index: 1;
+  background-color: inherit;
+}
+
+.toolBar{
+  width: calc((var(--page-width) * (1 - var(--toc-width-ratio))) - 2 * var(--content-horizontal-padding));
+  max-width: calc((100% * (1 - var(--toc-width-ratio))) - 2 * var(--content-horizontal-padding));
+  height: var(--toolbar-height);
+  position: absolute;
+  right: 0;
+  padding: 0 var(--content-horizontal-padding);
+  background-color: inherit;
+  }
+
+  /*use inner-wrapper to apply padding to parent objects having children absolutly positioned*/
+.inner-wrapper {
+  position: relative;
+  background-color: inherit;
+}
+
+.toc {
+  font-size: var(--toc-font-size);
+  width: calc((var(--page-width) * var(--toc-width-ratio)) - 2 * var(--toc-font-size));
+  max-width: calc((100% * var(--toc-width-ratio)) - 2 * var(--toc-font-size));
+  min-height: 100vh;
+  position: absolute;
+  left: 0;
+  padding: var(--toc-font-size);
+}
+
+.toc ul {
+  list-style-type: none;
+  padding-left: var(--toc-font-size);
+}
+
+.toc ul li {
+  margin: var(--toc-font-size) 0;
+}
+
+.toc ul li::before {
+  content: "\f105";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  margin-left: calc(-1 * var(--toc-font-size));
+}
+
+.toc a {
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+.sticky-container{
+  width: var(--page-width);
+  max-width: 100%;
+  margin: 0 auto;
+  position: sticky;
+  top: 0;
+  background-color: inherit;
+  z-index: 2;
+}
+
+.themeButton{
+  position: absolute;
+  font-size: 25px;
+}
+
+.homeButton{
+  position: absolute;
+  font-size: 25px;
+}
+
+.bubbleSpeech{
+  visibility: hidden;
+  animation: none;
+  font-size: 14px;
+  padding: 7px 10px;
+  background-color: rgba(0,0,0,0.8);
+  color: rgb(255,255,255);
+  border-radius: 15px;
+  border: 1px groove rgb(255,255,255);
+  position: relative;
+  top: 10px;
+  right: 30%;
+}
+
+/***************DARK MODE**************/
+
+.dark-mode {
+  background-color: rgb(var(--dark-mode-bg-color));
+  color: rgb(var(--dark-mode-color));
+}
+
+.dark-mode .content a:link {
+  color: DodgerBlue;
+}
+
+.dark-mode .content a:visited {
+  color: plum;
+}
+
+.dark-mode code:not(pre code) {
+  background-color: DarkSlateGray;
+}
+
+.dark-mode .resultBox a .hovered {
+  background-color: rgba(var(--dark-mode-color), 0.1);;
+}
+
+.dark-mode .toc {
+  background-color: rgb(var(--dark-mode-toc-bg-color));
+}
+
+.dark-mode .toc a {
+  color: rgb(var(--dark-mode-toc-color));
+}
+
+.dark-mode .toc ul li::before {
+  color: rgb(var(--dark-mode-toc-color));
+}
+
+/***************LIGHT MODE**************/
+
+.light-mode {
+  background-color: rgb(var(--light-mode-bg-color));
+  color: rgb(var(--light-mode-color));
+}
+
+.light-mode code:not(pre code) {
+  background-color: azure;
+}
+
+.light-mode .resultBox a .hovered{
+  background-color: rgba(var(--light-mode-color), 0.05);
+}
+
+.light-mode .toc {
+  background-color: rgb(var(--light-mode-toc-bg-color));
+}
+
+.light-mode .toc a {
+  color: rgb(var(--light-mode-toc-color));
+}
+
+.light-mode .toc ul li::before {
+  color: rgb(var(--light-mode-toc-color));
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* mulish-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Mulish';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/mulish-v13-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* mulish-italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Mulish';
+  font-style: italic;
+  font-weight: 400;
+  src: url('./fonts/mulish-v13-latin-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}

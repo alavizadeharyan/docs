@@ -1,0 +1,9 @@
+List of plugins:
+
+Line Numbers
+Show Language
+Command Line
+Toolbar
+Copy to Clipboard Button
+Diff Highlight
+Treeview

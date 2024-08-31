@@ -1,0 +1,85 @@
+:root {
+  --search-container-font-size: 20px;
+  --search-container-width: 500px;
+  --search-container-border-width: 1px;
+  --search-container-border-style: solid;
+}
+
+.searchContainer{
+    background-color: inherit;
+    position: absolute;
+    width: var(--search-container-width);
+    border-radius: calc(var(--search-container-font-size) + var(--search-container-border-width));
+    border: var(--search-container-border-width) var(--search-container-border-style);
+    outline: none;
+  }
+  
+  .searchContainer input{
+    background-color: inherit;
+    color: inherit;
+    font-size: var(--search-container-font-size);
+    font-family: inherit;
+    padding: 0 var(--search-container-font-size);
+    line-height: calc(2 * var(--search-container-font-size));
+    width: calc(var(--search-container-width) - 4 * var(--search-container-font-size) - var(--search-container-border-width));
+    border: none;
+    outline: none;
+    margin-bottom: 0;
+    margin-left: 0;
+    position: relative;
+    border-top-left-radius: var(--search-container-font-size);
+    border-bottom-left-radius: calc(var(--search-container-font-size));
+  }
+  
+  .searchContainer.active input{
+    border-bottom-left-radius: 0;
+  }
+  
+  .searchContainer .resultBox{
+    top: var(--search-container-font-size);
+    max-height: 1000px;
+    overflow-y: auto;
+  }
+  
+  .searchContainer.active .resultBox{
+    background-color: inherit;
+    border-top: var(--search-container-border-width) var(--search-container-border-style);
+    padding: calc(var(--search-container-font-size) / 4) 0;
+    border-bottom-left-radius: var(--search-container-font-size);
+    border-bottom-right-radius: calc(var(--search-container-font-size));
+
+  }
+  
+  .searchContainer.active .resultBox a{
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .searchContainer.active .resultBox .item{
+    font-size: var(--search-container-font-size);
+    padding-left: var(--search-container-font-size);
+    line-height: calc(1.5 * var(--search-container-font-size));
+  }
+  
+  .resultBox a .hovered{
+    background-color: rgba(0, 174, 255, 0.3);
+  }
+
+  .searchContainer .icon{
+    background-color: inherit;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    border-left: var(--search-container-border-width) var(--search-container-border-style);
+    line-height: calc(2 * var(--search-container-font-size));
+    width: calc(2 * var(--search-container-font-size));
+    font-size: var(--search-container-font-size);
+    border-top-right-radius: var(--search-container-font-size);
+    border-bottom-right-radius: calc(var(--search-container-font-size));
+  }
+
+  .searchContainer.active .icon{
+    border-bottom-right-radius: 0;
+  }
