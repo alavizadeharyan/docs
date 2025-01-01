@@ -66,36 +66,115 @@ function getClassStyles(className) {
 function createTOC() {
     // Select the container where the TOC will be inserted
     const toc = document.querySelector('.toc');
+    let root = document.documentElement;
 
     if (toc) {
         // Get all the headers (h1, h2, h3, etc.)
         const headers = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
 
-        // Create a list element to hold the TOC entries
-        const tocList = document.createElement('ul');
+        const headerLevels = Array.from(headers).map(header => parseInt(header.tagName.charAt(1)));
+        const topLevel = Math.min(...headerLevels);
+        
+        var toClose = [];
+        for (let i = 0; i < headerLevels.length; i++){
+            toClose.push([])
+            for (let j = i+1; j < headerLevels.length; j++){
+                if (headerLevels[i] >= headerLevels[j]){
+                    break;
+                } else {
+                    toClose[i].push(j);
+                }
+            }
+        }
 
-        headers.forEach(header => {
+        var toOpen = [];
+        for (let i = 0; i < headerLevels.length; i++){
+            var toOpenArray = [];
+            toClose[i].forEach(j => {
+                if (Math.min(...headerLevels.slice(i+1, j)) >= headerLevels[j]) {
+                    toOpenArray.push(j);
+                }
+            })
+            toOpen.push(toOpenArray);
+        }
+
+        // Create a list element to hold the TOC entries
+        const tocUl = document.createElement('ul');
+
+        // Get the toc font size from the CSS file
+        const tocFontSize = parseInt(getComputedStyle(root).getPropertyValue('--toc-font-size').trim());
+
+        headers.forEach((header, itr, _) => {
+            // Generate a simple ID based on header text and assign it to the header
+            const id = header.textContent.toLowerCase().replace(/\s+/g, '-');
+            header.id = id;
+
             // Create an anchor to link to each section
             const anchor = document.createElement('a');
-            const id = header.textContent.toLowerCase().replace(/\s+/g, '-'); // Generate a simple ID based on header text
-            header.id = id; // Assign the ID to the header element
             anchor.href = `#${id}`;
             anchor.textContent = header.textContent;
 
             // Create a list item and append the anchor to it
             const listItem = document.createElement('li');
-            listItem.style.marginLeft = `${(parseInt(header.tagName.charAt(1)) - 1) * 20}px`; // Indent based on header level
+            listItem.style.marginLeft = `${(headerLevels[itr] - 1) * tocFontSize}px`; // Indent based on header level
+
+            if (toOpen[itr].length != 0) {
+                let i = document.createElement('i');
+                i.classList.add('fa-solid');
+                i.classList.add('fa-angle-right');
+                i.style.cursor = 'pointer';
+                i.style.position = 'absolute';
+                i.style.left = `${headerLevels[itr] * tocFontSize}px`;
+                i.id = `toc_${itr.toString().padStart(4, '0')}`;
+                listItem.appendChild(i);
+            }
+            
             listItem.appendChild(anchor);
 
-            // Append the list item to the TOC list
-            tocList.appendChild(listItem);
+            if (headerLevels[itr] != topLevel) {
+                listItem.style.display = 'none';
+            }
+
+            tocUl.appendChild(listItem);
         });
 
         // Append the TOC list to the TOC container
-        toc.appendChild(tocList);
+        toc.appendChild(tocUl);
+
+        const extendableItems = tocUl.getElementsByTagName('i');
+
+        Array.from(extendableItems).forEach(item => {
+            item.addEventListener('click', function(e){
+                const idx = parseInt(e.target.id.slice(4,8));
+                switch (e.target.className) {
+                    case 'fa-solid fa-angle-right':
+                        e.target.classList.remove('fa-angle-right');
+                        e.target.classList.add('fa-angle-down');
+                        toOpen[idx].forEach(j => {
+                            let li = toc.getElementsByTagName('li')[j];
+                            li.style.display = '';
+                        });
+                        break;
+
+                    case 'fa-solid fa-angle-down':
+                        e.target.classList.remove('fa-angle-down');
+                        e.target.classList.add('fa-angle-right');
+                        toClose[idx].forEach(j => {
+                            let li = toc.getElementsByTagName('li')[j];
+                            li.style.display = 'none';
+                            if (li.getElementsByTagName('i').length != 0){
+                                if (li.getElementsByTagName('i')[0].className == 'fa-solid fa-angle-down'){
+                                    li.getElementsByTagName('i')[0].classList.remove('fa-angle-down');
+                                    li.getElementsByTagName('i')[0].classList.add('fa-angle-right');
+                                }
+                            }
+                        });
+                        break;
+                    }
+            });
+        });
     }
     else {
-        let root = document.documentElement;
         root.style.setProperty('--toc-width-ratio', '0');
     }
 }

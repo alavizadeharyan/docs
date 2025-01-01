@@ -65,26 +65,21 @@ h1, h2, h3, h4, h5, h6 {
   width: calc((var(--page-width) * var(--toc-width-ratio)) - 2 * var(--toc-font-size));
   max-width: calc((100% * var(--toc-width-ratio)) - 2 * var(--toc-font-size));
   min-height: 100vh;
+  max-height: 100vh;
   position: absolute;
   left: 0;
   padding: var(--toc-font-size);
+  overflow-y: auto;
 }
 
 .toc ul {
   list-style-type: none;
   padding-left: var(--toc-font-size);
+  padding-bottom: var(--toc-font-size);
 }
 
 .toc ul li {
   margin: var(--toc-font-size) 0;
-}
-
-.toc ul li::before {
-  content: "\f105";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  position: absolute;
-  margin-left: calc(-1 * var(--toc-font-size));
 }
 
 .toc a {
