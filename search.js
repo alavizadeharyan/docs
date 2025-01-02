@@ -129,7 +129,7 @@ function getMatchingItems(searchKey, method){
 
     let suggestions = [
         ["home", home],
-        ["scala", home+"scala"]
+        ["scala", home+"pages/scala"]
     ];
 
     suggestions = suggestions.map(suggestion=>

@@ -26,13 +26,13 @@ function justifyIndentation(str){
 
 function toggleTheme(){
     if (themeMode == 'dark-mode'){
-        prismLink.href = 'prism/prism_light.css';
+        prismLink.href = '../prism/prism_light.css';
         themeMode = 'light-mode';
         document.getElementById("themeButtonBubbleSpeech").innerHTML = "Switch To Dark Mode";
         document.body.classList.remove("dark-mode")
         document.body.classList.add("light-mode")
     } else {
-        prismLink.href = 'prism/prism_dark.css';
+        prismLink.href = '../prism/prism_dark.css';
         themeMode = 'dark-mode';
         document.getElementById("themeButtonBubbleSpeech").innerHTML = "Switch To Light Mode";
         document.body.classList.remove("light-mode")
@@ -192,7 +192,7 @@ if (getQueryParameter('theme')){
 
 document.body.classList.add(themeMode);
 
-prismLink.href = themeMode=="dark-mode" ? 'prism/prism_dark.css' : 'prism/prism_light.css';
+prismLink.href = themeMode=="dark-mode" ? '../prism/prism_dark.css' : '../prism/prism_light.css';
 
 const themeButton = document.querySelector(".themeButton");
 
