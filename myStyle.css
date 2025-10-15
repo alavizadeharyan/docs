@@ -44,9 +44,32 @@ h1, h2, h3, h4, h5, h6 {
   background-color: inherit;
 }
 
+.content-without-toc{
+  font-size: var(--content-font-size);
+  width: calc(var(--page-width) - 2 * var(--content-horizontal-padding));
+  max-width: calc(100% - 2 * var(--content-horizontal-padding));
+  padding: 0 var(--content-horizontal-padding);
+  text-align: justify;
+  margin: 0 auto;
+  left: 0;
+  position: relative;
+  z-index: 1;
+  background-color: inherit;
+}
+
 .toolBar{
   width: calc((var(--page-width) * (1 - var(--toc-width-ratio))) - 2 * var(--content-horizontal-padding));
   max-width: calc((100% * (1 - var(--toc-width-ratio))) - 2 * var(--content-horizontal-padding));
+  height: var(--toolbar-height);
+  position: absolute;
+  right: 0;
+  padding: 0 var(--content-horizontal-padding);
+  background-color: inherit;
+  }
+
+.toolBar-without-toc{
+  width: calc(var(--page-width) - 2 * var(--content-horizontal-padding));
+  max-width: calc(100% - 2 * var(--content-horizontal-padding));
   height: var(--toolbar-height);
   position: absolute;
   right: 0;
@@ -136,6 +159,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .dark-mode .content a:visited {
+  color: plum;
+}
+
+.dark-mode .content-without-toc a:link {
+  color: DodgerBlue;
+}
+
+.dark-mode .content-without-toc a:visited {
   color: plum;
 }
 

@@ -125,11 +125,11 @@ function goTo(searchKey){
 };
 
 function getMatchingItems(searchKey, method){
-    let home = "https://alavizadeharyan.github.io/docs/";
+    let home = "https://alavizadeharyan.github.io/docs/pages/";
 
     let suggestions = [
         ["home", home],
-        ["scala", home+"pages/scala"]
+        ["scala", home+"scala"]
     ];
 
     suggestions = suggestions.map(suggestion=>

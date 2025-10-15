@@ -40,13 +40,8 @@ function toggleTheme(){
     }
 };
 
-function getQueryParameter(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
-}
-
 function goHome(){
-    window.open(`https://alavizadeharyan.github.io/docs/index.html?theme=${encodeURIComponent(themeMode)}`, '_self');
+    window.open(`https://alavizadeharyan.github.io/docs/pages/index.html?theme=${encodeURIComponent(themeMode)}`, '_self');
 }
 
 function getClassStyles(className) {
@@ -174,25 +169,12 @@ function createTOC() {
             });
         });
     }
-    else {
-        root.style.setProperty('--toc-width-ratio', '0');
-    }
 }
 
 ///////////////////////////////////////////////////////////
 
 
 let prismLink = document.getElementById('prismTheme');
-
-var themeMode = 'dark-mode';
-
-if (getQueryParameter('theme')){
-    themeMode = getQueryParameter('theme');
-}
-
-document.body.classList.add(themeMode);
-
-prismLink.href = themeMode=="dark-mode" ? '../prism/prism_dark.css' : '../prism/prism_light.css';
 
 const themeButton = document.querySelector(".themeButton");
 

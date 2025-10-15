@@ -8,13 +8,15 @@
     -->
     <script id="MathJax-script" async src="../mathjax/tex-chtml.js"></script>
     <link rel="stylesheet" href="../fontawesome-free/css/all.css">
-    <link rel="stylesheet" id="prismTheme">
+    <script src="../loadPrismTheme.js"></script>
     <link rel="stylesheet" href="../myStyle.css">
     <link rel="stylesheet" href="../search.css">
 </head>
 
 <body class="line-numbers" style="font-family: Mulish">
-
+    <script>
+        document.body.classList.add(themeMode);
+    </script>
     <div class="sticky-container">
         <div class="toc"></div>
         <div class="toolBar">
@@ -598,9 +600,9 @@
         </code></pre>
 
     </div>
-    <script src="../prism/prism.js"></script>
     <script src="../search.js"></script>
     <script src="../main.js"></script>
+    <script src="../prism/prism.js"></script>
 </body>
 </html>
 
